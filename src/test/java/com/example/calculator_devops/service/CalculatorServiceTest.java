@@ -24,4 +24,16 @@ public class CalculatorServiceTest {
         assertEquals(1.77, result, 0.01);
     }
 
+    //subtract
+    @Test
+    void subtractTest1(){
+        double result = calculatorService.subtract(5, 2.8);
+        assertEquals(2.2, result, 0.01);
+    }
+
+    @Test
+    void subtractTest2(){
+        double result = calculatorService.subtract(5, -8);
+        assertEquals(13.0, result, 0.01);
+    }
 }

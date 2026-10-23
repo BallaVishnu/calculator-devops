@@ -27,4 +27,12 @@ public class CalculatorController {
             "result", calculatorService.add(a, b));
     }
 
+    @GetMapping("/subtract")
+    public Map<String,Object> subtract(@RequestParam double a, @RequestParam double b){
+        return Map.of("operation", "subtract",
+            "a",a,
+            "b",b,
+            "result", calculatorService.subtract(a,b));
+    }
+
 }

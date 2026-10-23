@@ -43,4 +43,16 @@ class CalculatorControllerTest {
         .andExpect(jsonPath("$.b").value("8.32"))
         .andExpect(jsonPath("$.result").value("3.32"));
     }
+
+    @Test
+    void subtractTest1() throws Exception{
+        when(calculatorService.subtract(5.0, 3.12)).thenReturn(1.88);
+        mockMvc.perform(get("/api/v1/subtract").param("a","5.0").param("b","3.12"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.operation").value("subtract"))
+        .andExpect(jsonPath("$.a").value("5.0"))
+        .andExpect(jsonPath("$.b").value("3.12"))
+        .andExpect(jsonPath("$.result").value("1.88"));
+    }
+
 }
