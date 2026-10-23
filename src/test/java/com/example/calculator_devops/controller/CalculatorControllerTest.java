@@ -32,4 +32,15 @@ class CalculatorControllerTest {
         .andExpect(jsonPath("$.b").value("3.12"))
         .andExpect(jsonPath("$.result").value("5.12"));
     }
+
+    @Test
+    void apiAddNegative() throws Exception{
+        when(calculatorService.add(-5, 8.32)).thenReturn(3.32);
+        mockMvc.perform(get("/api/v1/add").param("a","-5").param("b","8.32"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.operation").value("add"))
+        .andExpect(jsonPath("$.a").value("-5.0"))
+        .andExpect(jsonPath("$.b").value("8.32"))
+        .andExpect(jsonPath("$.result").value("3.32"));
+    }
 }
