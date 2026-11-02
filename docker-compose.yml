@@ -1,8 +1,6 @@
 services:
   calculator:
-    build:
-      context: . 
-      dockerfile: Dockerfile
+    image: vishnu933/calculator-devops:${IMAGE_TAG:-latest }
     
     environment:
       SERVER_PORT: 8080

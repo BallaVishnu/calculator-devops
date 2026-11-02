@@ -53,6 +53,23 @@ pipeline{
                 }
             }
         }
+
+        stage('Deploy'){
+            steps{
+                sh '''
+                    IMAGE_TAG=${BUILD_NUMBER} docker compose up -d
+                '''
+            }
+        }
+
+        stage('Health Check'){
+            steps{
+                sh '''
+                    sleep 10
+                    curl --fail http://localhost:8082/actuator/health
+                '''
+            }
+        }
     }
 }
 
