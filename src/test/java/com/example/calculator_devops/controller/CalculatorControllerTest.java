@@ -28,9 +28,9 @@ class CalculatorControllerTest {
         mockMvc.perform(get("/api/v1/add").param("a","2").param("b","3.12"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.operation").value("add"))
-        .andExpect(jsonPath("$.a").value("2.0"))
-        .andExpect(jsonPath("$.b").value("3.12"))
-        .andExpect(jsonPath("$.result").value("5.12"));
+        .andExpect(jsonPath("$.a").value(2.0))
+        .andExpect(jsonPath("$.b").value(3.12))
+        .andExpect(jsonPath("$.result").value(5.12));
     }
 
     @Test
@@ -65,5 +65,26 @@ class CalculatorControllerTest {
         .andExpect(jsonPath("$.b").value(5.0))
         .andExpect(jsonPath("$.result").value(20.0));
     }
+
+    @Test
+    void divideTest1() throws Exception {
+        when(calculatorService.divide(50.0, 10.0)).thenReturn(5.0);
+        mockMvc.perform(get("/api/v1/divide").param("a", "50").param("b", "10"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.operation").value("divide"))
+        .andExpect(jsonPath("$.a").value(50.0))
+        .andExpect(jsonPath("$.b").value(10.0))
+        .andExpect(jsonPath("$.result").value(5.0));
+    }
+
+    @Test
+    void divideByZeroTest() throws Exception {
+        when(calculatorService.divide(10.0, 0.0)).thenThrow(new IllegalArgumentException("Cannot divide by zero"));
+        mockMvc.perform(get("/api/v1/divide").param("a", "10").param("b", "0"))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.error")
+        .value("Cannot divide by zero"));
+    }
+
 
 }
