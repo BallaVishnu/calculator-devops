@@ -71,6 +71,30 @@ pipeline{
             }
         }
     }
+
+    post {
+        success{
+            mail(
+                to : 'vishnusaiprasanth24@gmail.com',
+                subject : "Build successful: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
+                body : """Build ${env.BUILD_NUMBER} completed successfully.
+                    Job: ${env.JOB_NAME}
+                    Build URL: ${env.BUILD_URL}
+                    """
+            )
+        }
+
+        failure{
+            mail(
+                to : 'vishnusaiprasanth24@gmail.com',
+                subject: "FAILED: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
+                body: """Build ${env.BUILD_NUMBER} failed.
+                    Job: ${env.JOB_NAME}
+                    Build URL: ${env.BUILD_URL}
+                    """
+            )
+        }
+    }
 }
 
 
