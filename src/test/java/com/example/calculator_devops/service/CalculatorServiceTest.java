@@ -10,7 +10,7 @@ public class CalculatorServiceTest {
     @Test
     void test1() {
         double result =calculatorService.add(2, 3);
-        assertEquals(8.0, result, 0.01);
+        assertEquals(5.0, result, 0.01);
     }
 
     @Test
