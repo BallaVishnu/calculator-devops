@@ -86,5 +86,19 @@ class CalculatorControllerTest {
         .value("Cannot divide by zero"));
     }
 
+    @Test
+    void missingParameterTest() throws Exception {
+        mockMvc.perform(get("/api/v1/add").param("a", "10"))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.error")
+        .value("Invalid request parameters"));
+    }
 
+    @Test
+    void invalidParameterTest() throws Exception {
+        mockMvc.perform(get("/api/v1/subtract").param("a", "hello").param("b", "2"))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.error")
+        .value("Invalid request parameters"));
+    }
 }
