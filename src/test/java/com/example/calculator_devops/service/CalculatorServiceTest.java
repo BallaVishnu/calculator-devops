@@ -2,6 +2,7 @@ package com.example.calculator_devops.service;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CalculatorServiceTest {
     private final CalculatorService calculatorService = new CalculatorService();
@@ -48,5 +49,18 @@ public class CalculatorServiceTest {
     void multiplyTest2(){
         double result = calculatorService.multiply(5, -8);
         assertEquals(-40.0, result, 0.01);
+    }
+
+    @Test
+    void divideTest1() {
+        assertEquals(5.0, calculatorService.divide(10.0, 2.0));
+    }
+
+    @Test
+    void divideByZero() {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> calculatorService.divide(10.0, 0.0)
+        );
     }
 }

@@ -43,4 +43,12 @@ public class CalculatorController {
             "result", calculatorService.multiply(a,b));
     }
 
+    @GetMapping("/divide")
+    public Map<String,Object> divide(@RequestParam double a, @RequestParam double b){
+        return Map.of("operation", "divide",
+            "a",a,
+            "b",b,
+            "result", calculatorService.divide(a,b));
+    }
+
 }
