@@ -55,4 +55,15 @@ class CalculatorControllerTest {
         .andExpect(jsonPath("$.result").value("1.88"));
     }
 
+    @Test
+    void multiplyTest1() throws Exception {
+        when(calculatorService.multiply(4.0, 5.0)).thenReturn(20.0);
+        mockMvc.perform(get("/api/v1/multiply").param("a", "4").param("b", "5"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.operation").value("multiply"))
+        .andExpect(jsonPath("$.a").value(4.0))
+        .andExpect(jsonPath("$.b").value(5.0))
+        .andExpect(jsonPath("$.result").value(20.0));
+    }
+
 }

@@ -36,4 +36,17 @@ public class CalculatorServiceTest {
         double result = calculatorService.subtract(5, -8);
         assertEquals(13.0, result, 0.01);
     }
+
+    //multiply
+    @Test
+    void multiplyTest1(){
+        double result = calculatorService.multiply(5, 2.8);
+        assertEquals(14.0, result, 0.01);
+    }
+
+    @Test
+    void multiplyTest2(){
+        double result = calculatorService.multiply(5, -8);
+        assertEquals(-40.0, result, 0.01);
+    }
 }

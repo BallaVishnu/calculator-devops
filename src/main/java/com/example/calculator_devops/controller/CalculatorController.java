@@ -35,4 +35,12 @@ public class CalculatorController {
             "result", calculatorService.subtract(a,b));
     }
 
+    @GetMapping("/multiply")
+    public Map<String,Object> multiply(@RequestParam double a, @RequestParam double b){
+        return Map.of("operation", "multiply",
+            "a",a,
+            "b",b,
+            "result", calculatorService.multiply(a,b));
+    }
+
 }
